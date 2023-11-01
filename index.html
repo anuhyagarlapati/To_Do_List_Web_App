@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>TODO LIST WEB APP</title>
+</head>
+<body>
+    <div class="b1">
+        <h1>TODO LIST WEB APP</h1>
+        <form id="form">
+            <div class="b2">
+                <input type="text" id="un"  placeholder="Enter a Web App">
+                <button type="submit" class="btn submit-btn">ADD</button>
+            </div>
+        </form>
+        <div id="l1"></div>
+        <ul id="todo-list" class="list-container">
+            
+        </ul>
+    </div>
+    <script>
+        const entry = document.getElementById('un');
+        const form = document.getElementById('form');
+        const ul = document.getElementById('todo-list');
+        form.addEventListener("submit", addItem);
+        function addItem(e) {
+        e.preventDefault();
+        let val = entry.value.trim();
+        if (val) { 
+            createListItem(val);
+            entry.value = "";
+        }
+        else{
+            alert("Please enter a task");
+        }
+        }
+
+        function createListItem(val) {
+        const li = document.createElement('li');
+        li.className = 'list-item';
+        li.innerHTML = `
+            <p class="text">${val}</p>
+            <i onClick="editPost(this)" class="bx bxs-edit bx-sm"></i>
+            <i onClick="deletePost(this)" class='bx bxs-trash bx-sm'></i>`;
+            ul.append(li);
+        }
+        function editPost(e){
+        entry.value =e.parentElement.querySelector(".text").textContent;
+        e.parentElement.remove();
+        }
+        function deletePost(e){
+        e.parentElement.remove();
+        };
+
+    </script>
+</body>
+
+</html>
